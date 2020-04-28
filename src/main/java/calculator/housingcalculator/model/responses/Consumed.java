@@ -12,14 +12,16 @@ public class Consumed{
 	@SerializedName("coldWater")
 	private int coldWater;
 
+	@SerializedName("hotWater")
+	private int hotWater;
+
 	@SerializedName("gas")
 	private int gas;
 
 	@SerializedName("electricity")
 	private int electricity;
 
-	@SerializedName("hotWater")
-	private int hotWater;
+
 
 
 	public void setColdWater(int coldWater){
@@ -58,10 +60,10 @@ public class Consumed{
  	public String toString(){
 		return 
 			"Consumed{" + 
-			"coldWater = '" + coldWater + '\'' + 
-			",gas = '" + gas + '\'' + 
-			",electricity = '" + electricity + '\'' + 
-			",hotWater = '" + hotWater + '\'' + 
+			"coldWater = '" + coldWater + '\'' +
+			",hotWater = '" + hotWater + '\'' +
+			",gas = '" + gas + '\'' +
+			",electricity = '" + electricity + '\'' +
 			"}";
 		}
 }

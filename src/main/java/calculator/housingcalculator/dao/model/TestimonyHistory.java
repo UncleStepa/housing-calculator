@@ -10,7 +10,8 @@ public class TestimonyHistory {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  private String current_month;
+  @Column(name = "currentmonth")
+  private String currentMonth;
   private String previous_month;
 
   @Column(name = "coldwater")
@@ -33,6 +34,13 @@ public class TestimonyHistory {
   private double cost_electricity;
   private double total_cost;
 
+  public TestimonyHistory() {
+  }
+
+  public TestimonyHistory(String current_month) {
+    this.currentMonth = current_month;
+  }
+
   public double getTotal_cost() {
     return total_cost;
   }
@@ -50,11 +58,11 @@ public class TestimonyHistory {
   }
 
   public String getCurrent_month() {
-    return current_month;
+    return currentMonth;
   }
 
   public void setCurrent_month(String current_month) {
-    this.current_month = current_month;
+    this.currentMonth = current_month;
   }
 
   public String getPrevious_month() {
@@ -133,7 +141,7 @@ public class TestimonyHistory {
   public String toString() {
     return "TestimonyHistory{" +
             "id='" + id + '\'' +
-            ", current_month='" + current_month + '\'' +
+            ", currentMonth='" + currentMonth + '\'' +
             ", previous_month='" + previous_month + '\'' +
             ", coldWater=" + coldWater +
             ", hotWater=" + hotWater +

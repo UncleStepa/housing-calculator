@@ -1,6 +1,5 @@
 package calculator.housingcalculator.controller;
 
-
 import calculator.housingcalculator.dao.model.BillingPeriod;
 import calculator.housingcalculator.dao.model.PriceGuide;
 import calculator.housingcalculator.dao.model.TestimonyHistory;
@@ -9,13 +8,14 @@ import calculator.housingcalculator.dao.repositorys.HistoryTestimonyRepository;
 import calculator.housingcalculator.dao.repositorys.PriceGuideRepository;
 import calculator.housingcalculator.helper.FlowGeneration;
 import calculator.housingcalculator.helper.PriceCalculation;
-import calculator.housingcalculator.model.requests.Price;
 import calculator.housingcalculator.model.requests.PriceChange;
 import calculator.housingcalculator.model.requests.RequestSaveTestimony;
 import calculator.housingcalculator.model.responses.ResponsePriceChange;
 import calculator.housingcalculator.model.responses.ResponseSaveTestimony;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("services/testimony")
@@ -32,27 +32,21 @@ public class CalculatorController {
 
   @PostMapping("/save")
   public ResponseSaveTestimony getResponseSavaTestimony(@RequestBody RequestSaveTestimony requestSaveTestimony) {
-    TestimonyHistory testimonyHistory = new TestimonyHistory();
     BillingPeriod billingPeriod = billingPeriodRepository.findAll().get(0);
     PriceGuide priceGuide = priceGuideRepository.findAll().get(0);
 
-    testimonyHistory = historyTestimonyRepository.save(FlowGeneration.flowTestimony(billingPeriod, priceGuide, requestSaveTestimony));
-    System.out.println(testimonyHistory.toString());
-    return FlowGeneration.getresponseSaveTestimony(testimonyHistory);
+    TestimonyHistory testimonyHistory = historyTestimonyRepository.save(FlowGeneration.
+            flowTestimony(billingPeriod, priceGuide, requestSaveTestimony));
+    billingPeriodRepository.deleteAll();
+    billingPeriodRepository.save(FlowGeneration.generateBillingPeriod(requestSaveTestimony));
+    return FlowGeneration.getResponseSaveTestimony(testimonyHistory);
   }
 
-
-  public static ResponseSaveTestimony getNoralResponse() {
-    ResponseSaveTestimony responseSeveTestimony = new ResponseSaveTestimony();
-    responseSeveTestimony.setDate("04-2020");
-    responseSeveTestimony.setPreviousDate("03-2020");
-
-    return  responseSeveTestimony;
-  }
 
   @GetMapping("get/old/testimony/{date}")
     public ResponseSaveTestimony getResponseWhithOldTestimony(@PathVariable("date") String date) {
-      return  getNoralResponse();
+    TestimonyHistory testimonyHistory = historyTestimonyRepository.findAllByCurrentMonth(date);
+      return  FlowGeneration.getResponseSaveTestimony(testimonyHistory);
   }
 
   @PostMapping("/changePrice")

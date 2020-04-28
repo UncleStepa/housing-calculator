@@ -10,8 +10,6 @@ package calculator.housingcalculator.dao.repositorys;
 @Repository
 public interface HistoryTestimonyRepository extends JpaRepository<TestimonyHistory, Long> {
 
-
-
-
+        TestimonyHistory findAllByCurrentMonth( final String date );
 }
 

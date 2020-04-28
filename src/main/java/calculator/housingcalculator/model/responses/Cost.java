@@ -7,8 +7,8 @@ public class Cost{
 	@SerializedName("coldWater")
 	private double coldWater;
 
-	@SerializedName("finalCost")
-	private double finalCost;
+	@SerializedName("hotWater")
+	private double hotWater;
 
 	@SerializedName("gas")
 	private double gas;
@@ -16,23 +16,12 @@ public class Cost{
 	@SerializedName("electricity")
 	private double electricity;
 
-	@SerializedName("hotWater")
-	private double hotWater;
-
 	public void setColdWater(double coldWater){
 		this.coldWater = coldWater;
 	}
 
 	public double getColdWater(){
 		return coldWater;
-	}
-
-	public void setFinalCost(double finalCost){
-		this.finalCost = finalCost;
-	}
-
-	public double getFinalCost(){
-		return finalCost;
 	}
 
 	public void setGas(double gas){
@@ -60,14 +49,12 @@ public class Cost{
 	}
 
 	@Override
- 	public String toString(){
-		return 
-			"Cost{" + 
-			"coldWater = '" + coldWater + '\'' + 
-			",finalCost = '" + finalCost + '\'' + 
-			",gas = '" + gas + '\'' + 
-			",electricity = '" + electricity + '\'' + 
-			",hotWater = '" + hotWater + '\'' + 
-			"}";
-		}
+	public String toString() {
+		return "Cost{" +
+						"coldWater=" + coldWater +
+						", hotWater=" + hotWater +
+						", gas=" + gas +
+						", electricity=" + electricity +
+						'}';
+	}
 }

@@ -5,9 +5,6 @@ import calculator.housingcalculator.model.requests.PriceChange;
 
 public class PriceCalculation {
 
-
-
-
   public static PriceGuide calculateionPrice(PriceChange priceChange) {
     PriceGuide actualpriceGuide = new PriceGuide();
     actualpriceGuide.setPriceColdWater(priceChange.getPrice().getPriceColdWater());
