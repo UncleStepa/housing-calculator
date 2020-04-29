@@ -30,6 +30,7 @@ public class CalculatorController {
   @Autowired
   HistoryTestimonyRepository historyTestimonyRepository;
 
+  @CrossOrigin()
   @PostMapping("/save")
   public ResponseSaveTestimony getResponseSavaTestimony(@RequestBody RequestSaveTestimony requestSaveTestimony) {
     BillingPeriod billingPeriod = billingPeriodRepository.findAll().get(0);
@@ -42,13 +43,14 @@ public class CalculatorController {
     return FlowGeneration.getResponseSaveTestimony(testimonyHistory);
   }
 
-
+  @CrossOrigin()
   @GetMapping("get/old/testimony/{date}")
     public ResponseSaveTestimony getResponseWhithOldTestimony(@PathVariable("date") String date) {
     TestimonyHistory testimonyHistory = historyTestimonyRepository.findAllByCurrentMonth(date);
       return  FlowGeneration.getResponseSaveTestimony(testimonyHistory);
   }
 
+  @CrossOrigin()
   @PostMapping("/changePrice")
   public ResponsePriceChange getResponseChangePrice(@RequestBody PriceChange priceChange) {
     PriceGuide priceGuide = PriceCalculation.calculateionPrice(priceChange);
