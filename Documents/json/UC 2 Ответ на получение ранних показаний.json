@@ -1,6 +1,7 @@
 {
     "date": "04-2020",
     "previousDate": "03-2020",
+    "totalCost": 10.5,
     "consumed": {
         "coldWater": 1,
         "hotWater": 1,
@@ -13,5 +14,8 @@
         "gas": "3.1",
         "electricity": "4.1"
     },
-    "totalCost": 10.5
+    "faultcode": {
+        "resultCode" : "0",
+        "resultText" : "success"
+    }
 }
