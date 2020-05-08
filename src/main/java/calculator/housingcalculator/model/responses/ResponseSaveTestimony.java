@@ -2,18 +2,10 @@ package calculator.housingcalculator.model.responses;
 
 import com.google.gson.annotations.SerializedName;
 
-
-
-
-
-
-
 public class ResponseSaveTestimony{
-
 
 	@SerializedName("date")
 	private String date;
-
 
 	@SerializedName("previousDate")
 	private String previousDate;
@@ -27,6 +19,24 @@ public class ResponseSaveTestimony{
 	@SerializedName("totalCost")
 	private double totalCost;
 
+	@SerializedName("faultcode")
+	private Faultcode faultcode;
+
+
+	public ResponseSaveTestimony() {
+	}
+
+	public ResponseSaveTestimony(String date, String previousDate, Consumed consumed, Cost cost, double totalCost) {
+		this.date = date;
+		this.previousDate = previousDate;
+		this.consumed = consumed;
+		this.cost = cost;
+		this.totalCost = totalCost;
+	}
+
+	public ResponseSaveTestimony(Faultcode faultcode) {
+		this.faultcode = faultcode;
+	}
 
 	public void setDate(String date){
 		this.date = date;
@@ -52,6 +62,14 @@ public class ResponseSaveTestimony{
 		return cost;
 	}
 
+	public void setFaultcode(Faultcode faultcode){
+		this.faultcode = faultcode;
+	}
+
+	public Faultcode getFaultcode(){
+		return faultcode;
+	}
+
 	public void setPreviousDate(String previousDate){
 		this.previousDate = previousDate;
 	}
@@ -60,22 +78,24 @@ public class ResponseSaveTestimony{
 		return previousDate;
 	}
 
-	public double getTotalCost() {
-		return totalCost;
-	}
-
-	public void setTotalCost(double totalCost) {
+	public void setTotalCost(double totalCost){
 		this.totalCost = totalCost;
 	}
 
-	@Override
-	public String toString() {
-		return "ResponseSaveTestimony{" +
-						"date='" + date + '\'' +
-						", consumed=" + consumed +
-						", cost=" + cost +
-						", previousDate='" + previousDate + '\'' +
-						", totalCost=" + totalCost +
-						'}';
+	public double getTotalCost(){
+		return totalCost;
 	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"ResponseSaveTestimony{" + 
+			"date = '" + date + '\'' + 
+			",consumed = '" + consumed + '\'' + 
+			",cost = '" + cost + '\'' +
+			",previousDate = '" + previousDate + '\'' + 
+			",totalCost = '" + totalCost + '\'' +
+			",faultcode = '" + faultcode + '\'' +
+				"}";
+		}
 }

@@ -1,19 +1,11 @@
 package calculator.housingcalculator.model.responses;
 
-
 import com.google.gson.annotations.SerializedName;
-
-
-
 
 public class Consumed{
 
-
 	@SerializedName("coldWater")
 	private int coldWater;
-
-	@SerializedName("hotWater")
-	private int hotWater;
 
 	@SerializedName("gas")
 	private int gas;
@@ -21,8 +13,8 @@ public class Consumed{
 	@SerializedName("electricity")
 	private int electricity;
 
-
-
+	@SerializedName("hotWater")
+	private int hotWater;
 
 	public void setColdWater(int coldWater){
 		this.coldWater = coldWater;
@@ -60,10 +52,10 @@ public class Consumed{
  	public String toString(){
 		return 
 			"Consumed{" + 
-			"coldWater = '" + coldWater + '\'' +
-			",hotWater = '" + hotWater + '\'' +
-			",gas = '" + gas + '\'' +
-			",electricity = '" + electricity + '\'' +
+			"coldWater = '" + coldWater + '\'' + 
+			",gas = '" + gas + '\'' + 
+			",electricity = '" + electricity + '\'' + 
+			",hotWater = '" + hotWater + '\'' + 
 			"}";
 		}
 }
