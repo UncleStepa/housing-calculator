@@ -10,6 +10,6 @@ CREATE TABLE billing_period(
 
 
 INSERT INTO billing_period (id, current_month, coldWater, hotWater, gas, electricity) 
- VALUES ("1", "01-2020" ,10, 20, 30, 40);
+ VALUES ("1", "01-2020" ,0, 0, 0, 0);
  
 COMMIT;
