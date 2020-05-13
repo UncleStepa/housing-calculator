@@ -6,6 +6,7 @@ import calculator.housingcalculator.dao.model.TestimonyHistory;
 import calculator.housingcalculator.dao.repositorys.BillingPeriodRepository;
 import calculator.housingcalculator.dao.repositorys.HistoryTestimonyRepository;
 import calculator.housingcalculator.dao.repositorys.PriceGuideRepository;
+import calculator.housingcalculator.helper.ErrorGeneration;
 import calculator.housingcalculator.helper.FlowGeneration;
 import calculator.housingcalculator.helper.PriceCalculation;
 import calculator.housingcalculator.model.requests.PriceChange;
@@ -16,8 +17,6 @@ import calculator.housingcalculator.model.responses.ResponsePriceChange;
 import calculator.housingcalculator.model.responses.ResponseSaveTestimony;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("services/testimony")
@@ -34,27 +33,36 @@ public class CalculatorController {
 
   @CrossOrigin()
   @PostMapping("/save")
+  public ResponseSaveTestimony getResponseSaveTestimony(@RequestBody RequestSaveTestimony requestSaveTestimony) {
 
-  public ResponseSaveTestimony getResponseSavaTestimony(@RequestBody RequestSaveTestimony requestSaveTestimony) {
-    try {
-      BillingPeriod billingPeriod = billingPeriodRepository.findAll().get(0);
-      PriceGuide priceGuide = priceGuideRepository.findAll().get(0);
 
-      TestimonyHistory testimonyHistory = historyTestimonyRepository.save(FlowGeneration.
-              flowTestimony(billingPeriod, priceGuide, requestSaveTestimony));
-      billingPeriodRepository.deleteAll();
-      billingPeriodRepository.save(FlowGeneration.generateBillingPeriod(requestSaveTestimony));
-      return FlowGeneration.getResponseSaveTestimony(testimonyHistory);
-    }
-    catch (Exception e) {
+    if (billingPeriodRepository.count() == 0) {
       ResponseSaveTestimony responseSaveTestimony = new ResponseSaveTestimony();
-      Faultcode faultcode = new Faultcode();
-      faultcode.setResultCode("ERR-002");
-      faultcode.setResultText("Ошибка сохранения в БД");
-      responseSaveTestimony.setFaultcode(faultcode);
-      return responseSaveTestimony;
+      try {
+        billingPeriodRepository.save(FlowGeneration.generateBillingPeriod(requestSaveTestimony));
+        Faultcode faultcode = new Faultcode();
+        faultcode.setResultCode("0");
+        faultcode.setResultText("Первичные показания сохранены успешно");
+        responseSaveTestimony.setFaultcode(faultcode);
+        return responseSaveTestimony;
+      } catch (Exception e) {
+        return  ErrorGeneration.getBDErrorTestimony();
+      }
     }
-  }
+      try {
+        BillingPeriod billingPeriod = billingPeriodRepository.findAll().get(0);
+        PriceGuide priceGuide = priceGuideRepository.findAll().get(0);
+
+        TestimonyHistory testimonyHistory = historyTestimonyRepository.save(FlowGeneration.
+                flowTestimony(billingPeriod, priceGuide, requestSaveTestimony));
+        billingPeriodRepository.deleteAll();
+        billingPeriodRepository.save(FlowGeneration.generateBillingPeriod(requestSaveTestimony));
+        return FlowGeneration.getResponseSaveTestimony(testimonyHistory);
+      } catch (Exception e) {
+        return  ErrorGeneration.getBDErrorTestimony();
+      }
+    }
+
 
   @CrossOrigin()
   @GetMapping("get/old/testimony/{date}")
@@ -64,12 +72,7 @@ public class CalculatorController {
       return  FlowGeneration.getResponseSaveTestimony(testimonyHistory);
     }
     catch (Exception e) {
-      ResponseSaveTestimony responseSaveTestimony = new ResponseSaveTestimony();
-      Faultcode faultcode = new Faultcode();
-      faultcode.setResultCode("ERR-002");
-      faultcode.setResultText("Ошибка сохранения в БД");
-      responseSaveTestimony.setFaultcode(faultcode);
-      return responseSaveTestimony;
+      return  ErrorGeneration.getBDErrorTestimony();
     }
   }
 
@@ -85,10 +88,7 @@ public class CalculatorController {
       responsePriceChange.setResultText("success");
       return responsePriceChange;
     }catch (Exception e) {
-      ResponsePriceChange responsePriceChange = new ResponsePriceChange();
-      responsePriceChange.setResultCode("ERR-002");
-      responsePriceChange.setResultText("Ошибка сохранения в БД");
-      return responsePriceChange;
+    return ErrorGeneration.getBDErrorPricey();
     }
   }
 
