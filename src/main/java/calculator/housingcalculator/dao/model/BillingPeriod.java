@@ -10,8 +10,8 @@ public class BillingPeriod {
   @GeneratedValue(strategy = GenerationType.IDENTITY )
   private long id;
 
-  @Column(name = "current_month")
-  private String current_month;
+  @Column(name = "currentmonth")
+  private String currentMonth;
 
   @Column(name = "coldwater")
   private int coldWater;
@@ -22,17 +22,17 @@ public class BillingPeriod {
   private int gas;
   private int electricity;
 
-  public BillingPeriod(String current_month, int coldWater, int hotWater, int gas, int electricity) {
-    this.current_month = current_month;
+  public BillingPeriod(String currentMonth, int coldWater, int hotWater, int gas, int electricity) {
+    this.currentMonth = currentMonth;
     this.coldWater = coldWater;
     this.hotWater = hotWater;
     this.gas = gas;
     this.electricity = electricity;
   }
 
-  public BillingPeriod(long id, String current_month, int coldWater, int hotWater, int gas, int electricity) {
+  public BillingPeriod(long id, String currentMonth, int coldWater, int hotWater, int gas, int electricity) {
     this.id = id;
-    this.current_month = current_month;
+    this.currentMonth = currentMonth;
     this.coldWater = coldWater;
     this.hotWater = hotWater;
     this.gas = gas;
@@ -50,12 +50,12 @@ public class BillingPeriod {
     this.id = id;
   }
 
-  public String getCurrent_month() {
-    return current_month;
+  public String getCurrentMonth() {
+    return currentMonth;
   }
 
-  public void setCurrent_month(String current_month) {
-    this.current_month = current_month;
+  public void setCurrentMonth(String currentMonth) {
+    this.currentMonth = currentMonth;
   }
 
   public int getColdWater() {
@@ -94,7 +94,7 @@ public class BillingPeriod {
   public String toString() {
     return "BillingPeriod{" +
             "id='" + id + '\'' +
-            ", current_month='" + current_month + '\'' +
+            ", currentMonth='" + currentMonth + '\'' +
             ", coldWater=" + coldWater +
             ", hotWater=" + hotWater +
             ", gas=" + gas +

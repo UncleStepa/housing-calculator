@@ -12,6 +12,7 @@ public class TestimonyHistory {
 
   @Column(name = "currentmonth")
   private String currentMonth;
+
   private String previous_month;
 
   @Column(name = "coldwater")
@@ -37,8 +38,8 @@ public class TestimonyHistory {
   public TestimonyHistory() {
   }
 
-  public TestimonyHistory(String current_month) {
-    this.currentMonth = current_month;
+  public TestimonyHistory(String currentMonthh) {
+    this.currentMonth = currentMonth;
   }
 
   public double getTotal_cost() {
@@ -61,8 +62,8 @@ public class TestimonyHistory {
     return currentMonth;
   }
 
-  public void setCurrent_month(String current_month) {
-    this.currentMonth = current_month;
+  public void setCurrent_month(String currentMonth) {
+    this.currentMonth = currentMonth;
   }
 
   public String getPrevious_month() {

@@ -2,6 +2,8 @@ package calculator.housingcalculator.model.responses;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.math.RoundingMode;
+
 public class ResponseSaveTestimony{
 
 	@SerializedName("date")
