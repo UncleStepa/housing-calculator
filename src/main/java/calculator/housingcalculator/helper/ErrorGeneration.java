@@ -27,7 +27,7 @@ public class ErrorGeneration {
   public static ResponseSaveTestimony getFirsTestimony() {
     ResponseSaveTestimony responseSaveTestimony = new ResponseSaveTestimony();
     Faultcode faultcode = new Faultcode();
-    faultcode.setResultCode("0");
+    faultcode.setResultCode("ERR-000");
     faultcode.setResultText("Первичные показания сохранены успешно");
     responseSaveTestimony.setFaultcode(faultcode);
     return responseSaveTestimony;
@@ -39,5 +39,16 @@ public class ErrorGeneration {
     responsePriceChange.setResultText("Ошибка сохранения в БД");
     return responsePriceChange;
   }
+
+
+  public static ResponseSaveTestimony sqlErrorDateNotFaund() {
+    ResponseSaveTestimony responseSaveTestimony = new ResponseSaveTestimony();
+    Faultcode faultcode = new Faultcode();
+    faultcode.setResultCode("ERR-004");
+    faultcode.setResultText("Не найдены показания предыдущего месяца");
+    responseSaveTestimony.setFaultcode(faultcode);
+    return responseSaveTestimony;
+  }
+
 
 }
